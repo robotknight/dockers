@@ -38,7 +38,7 @@ services:
     command:
       ['mysqld','--character-set-server=utf8']
     networks:
-      - backend
+      - backend 
 
 volumes:
   mysql-data:
