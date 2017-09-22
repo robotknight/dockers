@@ -20,19 +20,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.php
-      networks: 
+    networks: 
         - frontend
         - backend
-      enviroment:
+    environment:
         MYSQL_PASSWORD: allen
-      depends_on:
+    depends_on:
         - mysql 
 
   mysql:
     image:  "${DOCKER_USER}/docker-lnmp:mysql-5.7"
     volumes:
       - mysql-data:/var/lib/mysql
-    enviroment:
+    environment:
       TZ: 'Asia/Shanghai'
       MYSQL_ROOT_PASSWORD: allen
     command:
@@ -41,7 +41,7 @@ services:
       - backend
 
 volumes:
-mysql-data:
+  mysql-data:
 
 networks:
   frontend:
