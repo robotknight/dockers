@@ -1,0 +1,48 @@
+
+# allen~
+version: '2'
+services:
+
+  nginx:
+    image: "${DOCKER_USER}/docker-lnmp:nginx-1.0"    
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx    
+    ports: 
+      - "80:80"
+    networks:
+      - frontend
+    depends_on:
+      - php  
+
+  php:
+    image: "${DOCKER_USER}/docker-lnmp:php-7" 
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+      networks: 
+        - frontend
+        - backend
+      enviroment:
+        MYSQL_PASSWORD: allen
+      depends_on:
+        - mysql 
+
+  mysql:
+    image:  "${DOCKER_USER}/docker-lnmp:mysql-5.7"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    enviroment:
+      TZ: 'Asia/Shanghai'
+      MYSQL_ROOT_PASSWORD: allen
+    command:
+      ['mysqli','--character-set-server=utf8']
+    networks:
+      - backend
+
+volumes:
+mysql-data:
+
+networks:
+  frontend:
+  backend:  

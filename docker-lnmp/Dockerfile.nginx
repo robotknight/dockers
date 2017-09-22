@@ -1,0 +1,7 @@
+#allen
+
+FROM nginx:1.11
+MAINTAINER allen '<luoye@live.cn>'
+ENV TZ=Asia/Shanghai
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./site /usr/share/nginx/html
