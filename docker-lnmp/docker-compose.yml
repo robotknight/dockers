@@ -36,7 +36,7 @@ services:
       TZ: 'Asia/Shanghai'
       MYSQL_ROOT_PASSWORD: allen
     command:
-      ['mysqli','--character-set-server=utf8']
+      ['mysqld','--character-set-server=utf8']
     networks:
       - backend
 
